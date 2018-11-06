@@ -1,8 +1,12 @@
 package models;
 
+
+
+import java.io.Serializable;
 import java.util.List;
 
-public class RecipesModel {
+public class RecipesModel implements Serializable {
+
     String name;
     List<Ingredients> ingredientsList;
     List<Steps> stepsList;
@@ -12,6 +16,8 @@ public class RecipesModel {
         this.ingredientsList = ingredientsList;
         this.stepsList = stepsList;
     }
+
+
 
     public void setName(String name) {
         this.name = name;
@@ -36,4 +42,7 @@ public class RecipesModel {
     public List<Steps> getStepsList() {
         return stepsList;
     }
+
+
+
 }

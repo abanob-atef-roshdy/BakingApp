@@ -1,6 +1,8 @@
 package models;
 
-public class Steps {
+import java.io.Serializable;
+
+public class Steps implements Serializable {
     String shortDescription,description,videoUrl,Thumbnail;
 
     public Steps(String shortDescription, String description, String videoUrl, String thumbnail) {

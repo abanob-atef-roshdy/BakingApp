@@ -1,7 +1,9 @@
 package fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -32,13 +34,14 @@ import java.util.List;
 import Adapters.MainAdapter;
 import bebo.bakingapp.MainActivity;
 import bebo.bakingapp.R;
+import bebo.bakingapp.RecipeDetailActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import models.Ingredients;
 import models.RecipesModel;
 import models.Steps;
 
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment implements MainAdapter.RecipeClickHandler  {
     @BindView(R.id.recipeRecyclerView)
     RecyclerView recipeRec;
 
@@ -55,24 +58,30 @@ public class MainFragment extends Fragment {
      View view = inflater.inflate(R.layout.fragment_main,container,false);
         ButterKnife.bind(this,view);
         ingredientsList = new ArrayList<>();
+      final   Context context = getContext();
         stepsList = new ArrayList<>();
+      //  resultList = loadRecipesData(context);
         resultList = new ArrayList<>();
-        Context context = getContext();
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recipeRec.setLayoutManager(layoutManager);
         recipeRec.setHasFixedSize(true);
         loadRecipesData(context);
-        mainAdapter = new MainAdapter(resultList,context);
-        recipeRec.setAdapter(mainAdapter);
+        //mainAdapter = new MainAdapter(resultList,context);
+//        RecipesModel recipesModel = resultList.get(1);
+  //      String name = recipesModel.getName();
+    //    Toast.makeText(context, name, Toast.LENGTH_SHORT).show();
+       // recipeRec.setAdapter(mainAdapter);
         return view;
     }
-    public void loadRecipesData(Context context){
+    public void loadRecipesData(final Context context){
         RequestQueue queue = Volley.newRequestQueue(context);
         String url = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
+
                     JSONArray all = new JSONArray(response);
                     for(int i =0;i<all.length();i++){
                         JSONObject object1 = all.getJSONObject(i);
@@ -98,7 +107,9 @@ public class MainFragment extends Fragment {
                         }
                         RecipesModel recipesModel = new RecipesModel(name,ingredientsList,stepsList);
                         resultList.add(recipesModel);
-
+                        Context context1 = getContext();
+                        mainAdapter = new MainAdapter(resultList,context1, MainFragment.this );
+                        recipeRec.setAdapter(mainAdapter);
                     }
 
                 } catch (JSONException e) {
@@ -121,4 +132,12 @@ public class MainFragment extends Fragment {
 
     }
 
+
+    @Override
+    public void onRecipeClick(RecipesModel recipesModel) {
+        Intent intent = new Intent(getContext(),RecipeDetailActivity.class);
+        intent.putExtra("fd",  recipesModel);
+        startActivity(intent);
+
+    }
 }

@@ -1,6 +1,8 @@
 package models;
 
-public class Ingredients {
+import java.io.Serializable;
+
+public class Ingredients implements Serializable {
     String measure,ingredient;
     int quantity;
 
