@@ -24,7 +24,7 @@ public class DetailFragment extends Fragment  {
     List<Ingredients> ingredientsList;
     @BindView(R.id.ingerLabel)
     TextView labelTv;
-
+    public DetailFragment(){}
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -32,10 +32,13 @@ public class DetailFragment extends Fragment  {
         ButterKnife.bind(this,view);
 
         ingredientsList = recipesModel.getIngredientsList();
-        for(Ingredients ingredients:ingredientsList){
+      for(Ingredients ingredients:ingredientsList){
             String content = ingredients.getQuantity()+ "" + ingredients.getMeasure()+ "" + ingredients.getIngredient();
+
             textView.append(content + "\n");
+
         }
+
 
  //       textView.setText(ingredientsList.get);
 

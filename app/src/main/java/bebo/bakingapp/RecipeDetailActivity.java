@@ -20,10 +20,11 @@ public class RecipeDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_detail);
         Intent intent = getIntent();
+        detailFragment = new DetailFragment();
         recipesModel = (RecipesModel) intent.getSerializableExtra("fd");
         detailFragment.setRecipesModel(recipesModel);
 
-      //  getSupportFragmentManager().beginTransaction().add(R.id.fragmentDetailContainer,detailFragment).commit();
+       getSupportFragmentManager().beginTransaction().add(R.id.detail_fragment,detailFragment).commit();
     }
 
 
