@@ -19,13 +19,14 @@ public class RecipeDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_detail);
-        recieveData();
-    }
-    public void recieveData(){
         Intent intent = getIntent();
         recipesModel = (RecipesModel) intent.getSerializableExtra("fd");
         detailFragment.setRecipesModel(recipesModel);
 
-
+      //  getSupportFragmentManager().beginTransaction().add(R.id.fragmentDetailContainer,detailFragment).commit();
     }
+
+
+
+
 }
