@@ -28,8 +28,9 @@ public class RecipeDetailActivity extends AppCompatActivity {
         recipesModel = (RecipesModel) intent.getSerializableExtra("fd");
         detailFragment.setRecipesModel(recipesModel,this);
 
-
-       getSupportFragmentManager().beginTransaction().add(R.id.detail_fragment,detailFragment).commit();
+       if(savedInstanceState == null) {
+           getSupportFragmentManager().beginTransaction().add(R.id.detail_fragment, detailFragment).commit();
+       }
         if (findViewById(R.id.step_detail_fragment) != null) {
             mTwoPane = true;
             VideoFragment stepDetailFragment = new VideoFragment();

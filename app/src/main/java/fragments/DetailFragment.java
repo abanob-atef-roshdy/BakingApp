@@ -1,6 +1,7 @@
 package fragments;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -36,6 +37,7 @@ public class DetailFragment extends Fragment implements DetailAdapter.StepsClick
     RecyclerView recyclerView;
     DetailAdapter detailAdapter;
     private Context mcontext;
+    String content;
 
 
 
@@ -53,11 +55,17 @@ public class DetailFragment extends Fragment implements DetailAdapter.StepsClick
 
         ingredientsList = recipesModel.getIngredientsList();
       for(Ingredients ingredients:ingredientsList){
-            String content = ingredients.getQuantity()+ "" + ingredients.getMeasure()+ "" + ingredients.getIngredient();
+             content = ingredients.getQuantity()+ "" + ingredients.getMeasure()+ "" + ingredients.getIngredient();
 
             textView.append(content + "\n" + "\n");
 
         }
+
+        if(mcontext != null){
+            SharedPreferences sharedPreferences = mcontext.getSharedPreferences("myWidget", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("recipeForWidget",textView.getText().toString());
+        editor.commit();}
         stepsList = recipesModel.getStepsList();
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
