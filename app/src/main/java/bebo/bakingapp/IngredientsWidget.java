@@ -19,11 +19,9 @@ public class IngredientsWidget extends AppWidgetProvider {
 
 
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.ingredients_widget);
-        Intent intent = new Intent(context,IngredientsWidget.class);
-        intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-        int[] idArray = new int[]{appWidgetId};
-        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, idArray);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+        Intent intent = new Intent(context,MainActivity.class);
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(context,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
         SharedPreferences sharedPreferences = context.getSharedPreferences("myWidget",Context.MODE_PRIVATE);
         String widgetText = sharedPreferences.getString("recipeForWidget","s");
         views.setTextViewText(R.id.appwidget_text, widgetText);
