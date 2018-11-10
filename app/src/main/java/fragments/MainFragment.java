@@ -80,35 +80,43 @@ public class MainFragment extends Fragment implements MainAdapter.RecipeClickHan
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+
                 try {
 
                     JSONArray all = new JSONArray(response);
-                    for(int i =0;i<all.length();i++){
+                    for(int i =0;i<all.length();i++) {
+                        List<Ingredients> ingredientsList = new ArrayList<>();
+                        List<Steps> stepsList = new ArrayList<>();
                         JSONObject object1 = all.getJSONObject(i);
-                        String name  = object1.getString("name");
+                        String name = object1.getString("name");
+
                         JSONArray ingredients = object1.getJSONArray("ingredients");
-                        for (int e =0;e<ingredients.length();e++){
+
+                        for (int e = 0; e < ingredients.length(); e++) {
+
                             JSONObject object2 = ingredients.getJSONObject(e);
                             int quantity = object2.getInt("quantity");
                             String measure = object2.getString("measure");
                             String ingred = object2.getString("ingredient");
-                            Ingredients ingredients1 = new Ingredients(quantity,measure,ingred);
+                            Ingredients ingredients1 = new Ingredients(quantity, measure, ingred);
                             ingredientsList.add(ingredients1);
                         }
                         JSONArray steps = object1.getJSONArray("steps");
-                        for(int d=0 ; d<steps.length();d++){
+                        for (int d = 0; d < steps.length(); d++) {
+
                             JSONObject object3 = steps.getJSONObject(d);
+                            int id = object3.getInt("id");
                             String shortdesc = object3.getString("shortDescription");
                             String desc = object3.getString("description");
                             String videoUrl = object3.getString("videoURL");
                             String thumbNail = object3.getString("thumbnailURL");
-                            Steps steps1 = new Steps(shortdesc,desc,videoUrl,thumbNail);
+                            Steps steps1 = new Steps(id,shortdesc, desc, videoUrl, thumbNail);
                             stepsList.add(steps1);
                         }
-                        RecipesModel recipesModel = new RecipesModel(name,ingredientsList,stepsList);
+                        RecipesModel recipesModel = new RecipesModel(name, ingredientsList, stepsList);
                         resultList.add(recipesModel);
                         Context context1 = getContext();
-                        mainAdapter = new MainAdapter(resultList,context1, MainFragment.this );
+                        mainAdapter = new MainAdapter(resultList, context1, MainFragment.this);
                         recipeRec.setAdapter(mainAdapter);
                     }
 

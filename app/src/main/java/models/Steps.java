@@ -4,8 +4,10 @@ import java.io.Serializable;
 
 public class Steps implements Serializable {
     String shortDescription,description,videoUrl,Thumbnail;
+    int id;
 
-    public Steps(String shortDescription, String description, String videoUrl, String thumbnail) {
+    public Steps(int id,String shortDescription, String description, String videoUrl, String thumbnail) {
+        this.id = id;
         this.shortDescription = shortDescription;
         this.description = description;
         this.videoUrl = videoUrl;
@@ -42,5 +44,13 @@ public class Steps implements Serializable {
 
     public String getThumbnail() {
         return Thumbnail;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 }
