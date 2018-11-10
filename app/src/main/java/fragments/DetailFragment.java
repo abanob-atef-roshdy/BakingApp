@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.List;
 
 import Adapters.DetailAdapter;
@@ -46,6 +47,8 @@ public class DetailFragment extends Fragment implements DetailAdapter.StepsClick
         ButterKnife.bind(this,view);
         if (savedInstanceState != null) {
             recipesModel = (RecipesModel) savedInstanceState.get("recipe");
+            stepsList = (List<Steps>) savedInstanceState.get("stepsList");
+            ingredientsList = (List<Ingredients>) savedInstanceState.get("ingredList");
         }
 
         ingredientsList = recipesModel.getIngredientsList();
@@ -77,6 +80,8 @@ public class DetailFragment extends Fragment implements DetailAdapter.StepsClick
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putSerializable("recipe", recipesModel);
+        outState.putSerializable("ingredList", (Serializable) ingredientsList);
+        outState.putSerializable("stepsList", (Serializable) stepsList);
     }
 
     @Override
