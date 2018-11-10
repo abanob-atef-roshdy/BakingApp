@@ -23,11 +23,11 @@ public class IngredientsWidget extends AppWidgetProvider {
         intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
         int[] idArray = new int[]{appWidgetId};
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, idArray);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingInten = PendingIntent.getBroadcast(context,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
         SharedPreferences sharedPreferences = context.getSharedPreferences("myWidget",Context.MODE_PRIVATE);
         String widgetText = sharedPreferences.getString("recipeForWidget","s");
         views.setTextViewText(R.id.appwidget_text, widgetText);
-        views.setOnClickPendingIntent(R.id.appwidget_text,pendingIntent);
+        views.setOnClickPendingIntent(R.id.appwidget_text,pendingInten);
 
 
         // Instruct the widget manager to update the widget
