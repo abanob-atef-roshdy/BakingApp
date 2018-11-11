@@ -59,6 +59,9 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainAdapterVie
         @BindView(R.id.name_tv)
        TextView name_tv;
 
+
+
+
         public MainAdapterViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);

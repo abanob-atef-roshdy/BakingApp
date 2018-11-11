@@ -55,7 +55,7 @@ public class DetailFragment extends Fragment implements DetailAdapter.StepsClick
 
         ingredientsList = recipesModel.getIngredientsList();
       for(Ingredients ingredients:ingredientsList){
-             content = ingredients.getQuantity()+ "" + ingredients.getMeasure()+ "" + ingredients.getIngredient();
+             content = ingredients.getQuantity()+ " " + ingredients.getMeasure()+"S"+" " + "of"+" "+ingredients.getIngredient();
 
             textView.append(content + "\n" + "\n");
 
