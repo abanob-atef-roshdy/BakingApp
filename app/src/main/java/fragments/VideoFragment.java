@@ -96,6 +96,7 @@ public class VideoFragment extends Fragment {
             mStepsList = (List<Steps>) savedInstanceState.get("stepslist");
             position = savedInstanceState.getLong("position");
             mTwoPane = savedInstanceState.getBoolean("mTwoPane");
+            playWhenReady = savedInstanceState.getBoolean("playPause");
         }
         renderCurrentStep();
         nextBtn.setOnClickListener(new View.OnClickListener() {
@@ -168,6 +169,7 @@ public class VideoFragment extends Fragment {
         outState.putSerializable("stepslist", (Serializable) mStepsList);
         outState.putLong("position", position);
         outState.putBoolean("mTwoPane",mTwoPane);
+        outState.putBoolean("playPause",playWhenReady);
     }
     private void initializePlayer() {
         player = ExoPlayerFactory.newSimpleInstance(
